@@ -1,4 +1,4 @@
-# User Story Template
+# User Story Template 
 
 **Title:**
 _As a [user role], I want [feature/goal], so that [reason]._
