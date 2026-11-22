@@ -6,8 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import java.time.LocalDate;
 
 @Entity
 public class Patient {
@@ -36,17 +38,30 @@ public class Patient {
     @Size(max = 255, message = "Address cannot exceed 255 characters")
     private String address;
 
+    @Past(message = "Date of birth must be in the past")
+    private LocalDate dateOfBirth;
+
+    @Pattern(regexp = "\\d{10}", message = "Emergency contact must be a 10-digit phone number")
+    private String emergencyContact;
+
+    @Size(max = 100, message = "Insurance provider cannot exceed 100 characters")
+    private String insuranceProvider;
+
     // No-argument constructor required by JPA
     public Patient() {
     }
 
     // Parameterized constructor
-    public Patient(String name, String email, String password, String phone, String address) {
+    public Patient(String name, String email, String password, String phone, String address,
+                   LocalDate dateOfBirth, String emergencyContact, String insuranceProvider) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.emergencyContact = emergencyContact;
+        this.insuranceProvider = insuranceProvider;
     }
 
     // Getters and Setters
@@ -96,5 +111,29 @@ public class Patient {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getEmergencyContact() {
+        return emergencyContact;
+    }
+
+    public void setEmergencyContact(String emergencyContact) {
+        this.emergencyContact = emergencyContact;
+    }
+
+    public String getInsuranceProvider() {
+        return insuranceProvider;
+    }
+
+    public void setInsuranceProvider(String insuranceProvider) {
+        this.insuranceProvider = insuranceProvider;
     }
 }

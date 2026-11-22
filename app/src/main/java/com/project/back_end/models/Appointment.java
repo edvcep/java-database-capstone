@@ -8,6 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -34,16 +35,25 @@ public class Appointment {
     @NotNull(message = "Status cannot be null")
     private int status;
 
+    @Size(max = 255, message = "Reason for visit cannot exceed 255 characters")
+    private String reasonForVisit;
+
+    @Size(max = 500, message = "Notes cannot exceed 500 characters")
+    private String notes;
+
     // No-argument constructor required by JPA
     public Appointment() {
     }
 
     // Parameterized constructor
-    public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime, int status) {
+    public Appointment(Doctor doctor, Patient patient, LocalDateTime appointmentTime, int status,
+                       String reasonForVisit, String notes) {
         this.doctor = doctor;
         this.patient = patient;
         this.appointmentTime = appointmentTime;
         this.status = status;
+        this.reasonForVisit = reasonForVisit;
+        this.notes = notes;
     }
 
     // Helper methods (not persisted in the database)
@@ -101,5 +111,21 @@ public class Appointment {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getReasonForVisit() {
+        return reasonForVisit;
+    }
+
+    public void setReasonForVisit(String reasonForVisit) {
+        this.reasonForVisit = reasonForVisit;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }

@@ -1,5 +1,6 @@
 package com.project.back_end.models;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
@@ -29,17 +30,21 @@ public class Prescription {
     @Size(max = 200, message = "Doctor notes cannot exceed 200 characters")
     private String doctorNotes;
 
+    @Min(value = 0, message = "Refill count cannot be negative")
+    private Integer refillCount;
+
     // Default no-argument constructor
     public Prescription() {
     }
 
     // Parameterized constructor
-    public Prescription(String patientName, Long appointmentId, String medication, String dosage, String doctorNotes) {
+    public Prescription(String patientName, Long appointmentId, String medication, String dosage, String doctorNotes, Integer refillCount) {
         this.patientName = patientName;
         this.appointmentId = appointmentId;
         this.medication = medication;
         this.dosage = dosage;
         this.doctorNotes = doctorNotes;
+        this.refillCount = refillCount;
     }
 
     // Getters and Setters
@@ -89,5 +94,13 @@ public class Prescription {
 
     public void setDoctorNotes(String doctorNotes) {
         this.doctorNotes = doctorNotes;
+    }
+
+    public Integer getRefillCount() {
+        return refillCount;
+    }
+
+    public void setRefillCount(Integer refillCount) {
+        this.refillCount = refillCount;
     }
 }
