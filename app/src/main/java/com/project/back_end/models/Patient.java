@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Patient {
@@ -28,6 +29,7 @@ public class Patient {
 
     @NotNull(message = "Password cannot be null")
     @Size(min = 6, message = "Password must be at least 6 characters long")
+    @JsonIgnore
     private String password;
 
     @NotNull(message = "Phone number cannot be null")

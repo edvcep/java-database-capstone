@@ -12,6 +12,8 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Appointment {
@@ -30,15 +32,18 @@ public class Appointment {
 
     @Future(message = "Appointment time must be in the future")
     @NotNull(message = "Appointment time cannot be null")
+    @JsonProperty("appointment_time")
     private LocalDateTime appointmentTime;
 
     @NotNull(message = "Status cannot be null")
     private int status;
 
     @Size(max = 255, message = "Reason for visit cannot exceed 255 characters")
+    @JsonProperty("reason_for_visit")
     private String reasonForVisit;
 
     @Size(max = 500, message = "Notes cannot exceed 500 characters")
+    @JsonIgnore
     private String notes;
 
     // No-argument constructor required by JPA
